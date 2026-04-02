@@ -1,8 +1,50 @@
+body {
+    color: lightgoldenrodyellow;
+    font-family: verdana;
+    font-size: 12pt;
+    background-image: linear-gradient(rgb(40, 40, 60), black);
+}
+
+button {
+    font-family: verdana;
+    background-color: midnightblue;
+    color: lightgoldenrodyellow;
+    border-color: rgb(244, 234, 209);
+    border-radius: 5px;
+    width: 5em;
+    height: 1.8em;
+    font-size: 12pt;
+    border-width: 3px;
+}
+
+input {
+    font-family: verdana;
+    background-color:rgb(224, 224, 215);
+    border-radius: 5px;
+    color: midnightblue;
+    font-family: verdana;
+    font-size: 12pt;
+    height: 1.5em;
+    width: 5em;
+    border-style: outset;
+}
+
+#shares {
+    font-weight: 600;
+}
+
+#price{
+    font-weight: 600;
+}
+
 #Buy {
-    background-color: lime;
+    background-color: rgb(27, 157, 27);
+    border-color: green;
+    color: white;
 }
 
 #Sell {
-    background-color: red;
+    background-color: rgb(191, 22, 22);
+    border-color: darkred;
     color: white;
 }

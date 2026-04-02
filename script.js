@@ -60,7 +60,7 @@ function gaussianRandom(mean=0, stdev=1) {
 function updateDisplay() {
     let price_element = document.getElementById('price');
     if (price.toFixed(2) > price_element.textContent) {
-        price_element.style.color = 'green';
+        price_element.style.color = 'lime';
     } else {
         price_element.style.color = 'red';
     }
@@ -69,24 +69,24 @@ function updateDisplay() {
 
     let shares_element = document.getElementById('shares');
     if (shares > 0) {
-        shares_element.style.color = 'green';
+        shares_element.style.color = 'lime';
     } else if (shares < 0) {
         shares_element.style.color = 'red';
     } else {
-        shares_element.style.color = 'black';
+        shares_element.style.color = '';
     }
     document.getElementById('shares').textContent = shares;
 
 
     let money_element = document.getElementById('money');
-    if (money.toFixed(2) > money_element.textContent) {
-        money_element.style.color = 'green';
-    } else if (money.toFixed(2) < money_element.textContent) {
+    if (money.toFixed(2) > money_element.textContent.slice(0, 2)) {
+        money_element.style.color = 'lime';
+    } else if (money.toFixed(2) < money_element.textContent.slice(0, 2)) {
         money_element.style.color = 'red';
     } else {
-        money_element.style.color = 'black';
+        money_element.style.color = '';
     }
-    document.getElementById('money').textContent = money.toFixed(2);
+    document.getElementById('money').textContent = money.toFixed(2) + ' $';
 }
 
 function updateChart() {
@@ -94,11 +94,12 @@ function updateChart() {
 
     let plot = Plot.plot({
         height: 280,
+        width: 750,
         y: {
             grid: true
         },
         marks: [
-            Plot.lineY(chart_data, {x: "date", y: "price"}),
+            Plot.lineY(chart_data, {x: "date", y: "price", stroke: "#009dff"})
             //Plot.lineY(chart_data, {x: "date", y: "support", stroke: "#FF0000"}),
             //Plot.lineY(chart_data, {x: "date", y: "resistance", stroke: "#00FF00"})
         ]
@@ -135,12 +136,13 @@ function updateChart() {
 
     let plot2 = Plot.plot({
         height: 280,
+        width: 750,
         y: {
             grid: true
         },
         marks: [
-            Plot.lineY(chart_data, {x: "date", y: "opp_equity", stroke: "#FF8000"}),
-            Plot.lineY(chart_data, {x: "date", y: "equity", stroke: "#0000FF"})
+            Plot.lineY(chart_data, {x: "date", y: "opp_equity", stroke: "blueviolet"}),
+            Plot.lineY(chart_data, {x: "date", y: "equity", stroke: "gold"})
         ]
     })
 
