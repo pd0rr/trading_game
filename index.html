@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6"></script>
+    <script src="./script.js"  defer></script>
+    <link rel="stylesheet" href="styles.css">
+    <title>The trading game</title>
+</head>
+<body>
+    <p>
+        <label for="price">Price: </label> <span id="price">0</span>
+        <button id="Update">Update</button>
+        <button id="play">Play</button>
+        <button id="stop">Stop</button>
+        <span id="message"></span>
+    </p>
+
+        <label for="money">Money: </label> <span id="money">10000</span>
+    </p>
+    <p>
+        <label for="shares">Shares: </label> <span id="shares">0</span>
+        
+    </p>
+    <p>
+        <label for="amount" >Amount: </label><input type="number" id="amount" value="100">
+        <button id="Buy">Buy</button>
+        <button id="Sell">Sell</button>
+    </p>
+
+    <!-- chart -->
+    <div id="chart"></div>
+</body>
+</html>
