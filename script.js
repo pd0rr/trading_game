@@ -1,23 +1,7 @@
-let spread = 0.01;
-
-
-let money = 10000;
-let shares = 0;
-
-
 let run = false;
-
-let counter = 0;
-let chart_data = [];
-
-// opponent data
-let opp_money = 10000;
-let opp_shares = 0;
-
 
 //create session
 let sess = new session();
-
 
 // create market
 let mkt = new market(100, 0.02);
@@ -56,9 +40,9 @@ function updateDisplay(mkt) {
 
 
     let money_element = document.getElementById('money');
-    if (player.balance.toFixed(2) > money_element.textContent.slice(0, 2)) {
+    if (player.balance.toFixed(2) > money_element.textContent.slice(0, -2)) {
         money_element.style.color = 'lime';
-    } else if (money.toFixed(2) < money_element.textContent.slice(0, 2)) {
+    } else if (player.balance.toFixed(2) < money_element.textContent.slice(0, -2)) {
         money_element.style.color = 'red';
     } else {
         money_element.style.color = '';
@@ -187,7 +171,7 @@ document.getElementById('Sell').onclick = function() {
     player.positions[0] -= shares_to_sell;
 
     // pay the spread
-    player.balance -= spread * shares_to_sell;
+    player.balance -= mkt.spread * shares_to_sell;
     updateDisplay(mkt);
 }
 
