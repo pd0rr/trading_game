@@ -73,7 +73,7 @@ class trader {
 
     trade(shares, index) {
         this.positions[index] += shares;
-        this.balance -= this.markets[index].spread;
+        this.balance -= this.markets[index].spread * shares;
     }
 }
 
@@ -93,15 +93,18 @@ class donch_ai extends trader {
 
         let size = 1 * this.balance / price;
 
+        let oldpos = this.positions[index];
         if (price > donch.top && this.positions[index] <= 0) {
             this.positions[index] = size;
             // pay the spread
-            this.balance -= this.markets[index].spread * size;
+            this.balance -= this.markets[index].spread * (size-oldpos);
+            console.log(this.markets[index].spread * (size-oldpos)); // dbg
 
-        } else if (price < donch.bottom && this.positions[index] <= 0) {
+        } else if (price < donch.bottom && this.positions[index] >= 0) {
             this.positions[index] = -size;
             // pay the spread
-            this.balance -= this.markets[index].spread * size;
+            this.balance -= this.markets[index].spread * (size+oldpos);
+            console.log(this.markets[index].spread * (size+oldpos)); // dbg
         }
     }
 }

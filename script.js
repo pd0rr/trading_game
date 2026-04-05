@@ -176,8 +176,11 @@ document.getElementById('Sell').onclick = function() {
 }
 
 document.getElementById('play').onclick = function() {
-    run = true;
-    play();
+    if (not run) {
+        run = true;
+        play();
+    }
+    
 }
 
 document.getElementById('stop').onclick = function() {
