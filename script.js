@@ -176,7 +176,7 @@ document.getElementById('Sell').onclick = function() {
 }
 
 document.getElementById('play').onclick = function() {
-    if (not run) {
+    if (!run) {
         run = true;
         play();
     }
