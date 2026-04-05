@@ -48,3 +48,20 @@ input {
     border-color: darkred;
     color: white;
 }
+
+#chart {
+    float: left;
+}
+
+/* mobile */
+#tutorial {
+    float: bottom;
+}
+
+/* desktop */
+@media (min-width: 900px) {
+    #tutorial {
+        float: right;
+        width: 30%;
+    }
+}
