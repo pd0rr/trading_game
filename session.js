@@ -98,13 +98,13 @@ class donch_ai extends trader {
             this.positions[index] = size;
             // pay the spread
             this.balance -= this.markets[index].spread * (size-oldpos);
-            console.log(this.markets[index].spread * (size-oldpos)); // dbg
+            //console.log(this.markets[index].spread * (size-oldpos)); // dbg
 
         } else if (price < donch.bottom && this.positions[index] >= 0) {
             this.positions[index] = -size;
             // pay the spread
             this.balance -= this.markets[index].spread * (size+oldpos);
-            console.log(this.markets[index].spread * (size+oldpos)); // dbg
+            //console.log(this.markets[index].spread * (size+oldpos)); // dbg
         }
     }
 }
