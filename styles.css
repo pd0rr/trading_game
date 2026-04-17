@@ -29,6 +29,15 @@ input {
     border-style: outset;
 }
 
+select {
+    font-family: verdana;
+    padding: 5px;
+    background-color: midnightblue;
+    color: lightgoldenrodyellow;
+    border-width: 3px;
+    border-radius: 5px;
+}
+
 #shares {
     font-weight: 600;
 }

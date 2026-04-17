@@ -108,3 +108,28 @@ class donch_ai extends trader {
         }
     }
 }
+
+class channel_ai extends trader {
+    trade(index) {
+        // trade based on donchian channels
+        let donch = donch_channel(this.markets[index].data, 20);
+
+        let price = this.markets[index].price;
+
+        let size = 1 * this.balance / price;
+
+        let oldpos = this.positions[index];
+        if (price < donch.top && this.positions[index] <= 0) {
+            this.positions[index] = size;
+            // pay the spread
+            this.balance -= this.markets[index].spread * (size-oldpos);
+            //console.log(this.markets[index].spread * (size-oldpos)); // dbg
+
+        } else if (price > donch.bottom && this.positions[index] >= 0) {
+            this.positions[index] = -size;
+            // pay the spread
+            this.balance -= this.markets[index].spread * (size+oldpos);
+            //console.log(this.markets[index].spread * (size+oldpos)); // dbg
+        }
+    }
+}

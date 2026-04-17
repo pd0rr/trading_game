@@ -2,11 +2,17 @@ class market {
     
     price = 100;
     mean_sigma = 2/100;
+    box_strength = 1.85;
+    box_size = 5;
+    drift_strength = 1;
+
+
     sigma;
     drift = 0;
     support;
     resistance;
     spread = 0.01;
+
     time = 0;
 
     data = [];
@@ -15,8 +21,8 @@ class market {
     update() {
         // support and resistance
         let force = 0;
-        if (this.price > this.resistance) force = -1.85*this.sigma;
-        if (this.price < this.support) force = 1.85*this.sigma;
+        if (this.price > this.resistance) force = -this.box_strength*this.sigma;
+        if (this.price < this.support) force = this.box_strength*this.sigma;
 
         let pct_change = gaussianRandom(0, this.sigma) + this.drift*this.sigma + force;
         this.price *= 1 + pct_change;
@@ -25,11 +31,11 @@ class market {
         // if still above resistance of below support, update values
         if (force != 0 && this.price > this.resistance) {
             this.support = this.resistance;
-            this.resistance *= 1 + gaussianRandom(5 * this.sigma, 2*this.sigma);
+            this.resistance *= 1 + gaussianRandom(this.box_size * this.sigma, 2*this.sigma);
         }
         if (force != 0 && this.price < this.support) {
             this.resistance = this.support;
-            this.support *= 1 - gaussianRandom(5 * this.sigma, 2*this.sigma);
+            this.support *= 1 - gaussianRandom(this.box_size * this.sigma, 2*this.sigma);
         }
 
         this.data.push({time: this.time, price: this.price, drift: this.drift,
@@ -40,7 +46,7 @@ class market {
 
         // chance of changing parameters (drift)
         if (Math.random() < 0.05) {
-            this.drift = 1*((Math.floor(Math.random()*2)) - 0.5);
+            this.drift = this.drift_strength*((Math.floor(Math.random()*2)) - 0.5);
         }
 
         // change volatility smoothly
@@ -67,6 +73,75 @@ class market {
 
         this.support = (1-2*this.sigma)*this.price;
         this.resistance = (1+2*this.sigma)*this.price;
+    }
+}
+
+class random_market extends market {
+    constructor(price, volatility) {
+        super(price, volatility);
+    }
+
+    update() {
+        let pct_change = gaussianRandom(0, this.sigma) + this.drift*this.sigma;
+        this.price *= 1 + pct_change;
+
+        this.data.push({time: this.time, price: this.price, drift: this.drift,
+            support: this.support, resistance: this.resistance, sigma: this.sigma});
+    
+        this.time += 1;
+
+        // return percent change from last price to aid trader balance update.
+        return pct_change;
+    }
+}
+
+class trending_market extends market {
+    constructor(price, volatility, trend) {
+        super(price, volatility);
+        this.box_strength = 0;
+        this.drift_strength = trend;
+    }
+}
+
+
+class channel_market extends market {
+    box_strength;
+    box_var;
+
+    constructor(price, volatility, box_size=5, box_strength=1.85, box_var=2) {
+        super(price, volatility);
+        this.box_size = box_size;
+        this.box_strength = box_strength;
+        this.box_var = box_var;
+    }
+
+
+    update() {
+        // support and resistance
+        let force = 0;
+        if (this.price > this.resistance) force = -this.box_strength*this.sigma;
+        if (this.price < this.support) force = this.box_strength*this.sigma;
+
+        let pct_change = gaussianRandom(0, this.sigma) + this.drift*this.sigma + force;
+        this.price *= 1 + pct_change;
+
+
+        // if still above resistance of below support, update values
+        if (force != 0 && this.price > this.resistance) {
+            this.support = this.resistance;
+            this.resistance *= 1 + gaussianRandom(this.box_size * this.sigma, this.box_var*this.sigma);
+        }
+        if (force != 0 && this.price < this.support) {
+            this.resistance = this.support;
+            this.support *= 1 - gaussianRandom(this.box_size * this.sigma, this.box_var*this.sigma);
+        }
+
+        this.data.push({time: this.time, price: this.price, drift: this.drift,
+            support: this.support, resistance: this.resistance, sigma: this.sigma});
+    
+        this.time += 1;
+
+        return pct_change;
     }
 }
 

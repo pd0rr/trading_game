@@ -188,6 +188,54 @@ document.getElementById('stop').onclick = function() {
 }
 
 
+document.getElementById('level-select').onchange = function(e) {
+    let lvl = e.target.value;
+    console.log(lvl);
+    switch (lvl) {
+        // random market
+        case '0':
+            document.getElementById('message').textContent = ''
+            mkt = new random_market(100, 0.01);
+            player = new trader([mkt]);
+            sess = new session();
+            sess.markets = [mkt];
+            opponent = new donch_ai([mkt]);
+            sess.traders = [player, opponent];
+            sess.initialize();
+            updateDisplay(mkt);
+            updateChart(mkt);
+            break;
+
+        // trend
+        case '1':
+            document.getElementById('message').textContent = ''
+            mkt = new trending_market(100, 0.01, 0.5);
+            player = new trader([mkt]);
+            sess = new session();
+            sess.markets = [mkt];
+            opponent = new donch_ai([mkt]);
+            sess.traders = [player, opponent];
+            sess.initialize();
+            updateDisplay(mkt);
+            updateChart(mkt);
+            break;
+
+        // channel
+        case '2':
+            document.getElementById('message').textContent = ''
+            mkt = new channel_market(100, 0.01, 10, 3, 3);
+            player = new trader([mkt]);
+            sess = new session();
+            sess.markets = [mkt];
+            opponent = new channel_ai([mkt]);
+            sess.traders = [player, opponent];
+            sess.initialize();
+            updateDisplay(mkt);
+            updateChart(mkt);
+            break;
+    }
+}
+
 
 updateChart(mkt);
 updateDisplay(mkt);
