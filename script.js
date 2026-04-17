@@ -192,9 +192,11 @@ document.getElementById('level-select').onchange = function(e) {
     let lvl = e.target.value;
     console.log(lvl);
     switch (lvl) {
+
         // random market
         case '0':
             document.getElementById('message').textContent = ''
+            document.getElementById('tutorial-text').innerHTML = strings.tutorial[0];
             mkt = new random_market(100, 0.01);
             player = new trader([mkt]);
             sess = new session();
@@ -209,6 +211,7 @@ document.getElementById('level-select').onchange = function(e) {
         // trend
         case '1':
             document.getElementById('message').textContent = ''
+            document.getElementById('tutorial-text').innerHTML = strings.tutorial[1];
             mkt = new trending_market(100, 0.01, 0.5);
             player = new trader([mkt]);
             sess = new session();
@@ -223,6 +226,7 @@ document.getElementById('level-select').onchange = function(e) {
         // channel
         case '2':
             document.getElementById('message').textContent = ''
+            document.getElementById('tutorial-text').innerHTML = strings.tutorial[2];
             mkt = new channel_market(100, 0.01, 10, 3, 3);
             player = new trader([mkt]);
             sess = new session();

@@ -7,6 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6"></script>
     <script src="./market.js"></script>
     <script src="./session.js"></script>
+    <script src="./strings.js"></script>
     <script src="./script.js" defer></script>
     <link rel="stylesheet" href="styles.css">
     <title>Price Action</title>
@@ -45,33 +46,36 @@
             <option value="4">Level 4: position trading</option>
             <option value="5">Level 5: pairs trading</option>
         </select>
-        <p>
-            Welcome to <strong>Price Action</strong>! A game about trading the financial markets. 
-        </p>
-        <p>
-            Press <strong data-color='green'>Buy</strong> to purchase shares and <strong data-color='red'>Sell</strong> to sell them.
-            You can buy on leverage or take a short position without any limitations.
-        </p>
-        <p>
-            Press <strong>Update</strong> to advance to the next time step.
-            Press <strong>Play</strong> to advance time automatically.
-            Press <strong>Pause</strong> to pause the game. You can buy and sell shares even when the game is paused.
-        </p>
-        <p>
-            The chart at the top represents the stock <strong>price</strong> as a function of time.
-            Try to predict the stock's price and make money by trading!
-            The chart on the bottom displays your <strong>balance</strong> as a yellow line.
-            
-        </p>
+        <div id="tutorial-text">
+            <p>
+                Welcome to <strong>Price Action</strong>! A game about trading the financial markets. 
+            </p>
+            <p>
+                Press <strong data-color='green'>Buy</strong> to purchase shares and <strong data-color='red'>Sell</strong> to sell them.
+                You can buy on leverage or take a short position without any limitations.
+            </p>
+            <p>
+                Press <strong>Update</strong> to advance to the next time step.
+                Press <strong>Play</strong> to advance time automatically.
+                Press <strong>Pause</strong> to pause the game. You can buy and sell shares even when the game is paused.
+            </p>
+            <p>
+                The chart at the top represents the stock <strong>price</strong> as a function of time.
+                Try to predict the stock's price and make money by trading!
+                The chart on the bottom displays your <strong>balance</strong> as a yellow line.
+                
+            </p>
 
-        <p>
-            A <strong>computer opponent</strong> is trading on the same market; its balanced is displayed as a purple line.
-        </p>
+            <p>
+                A <strong>computer opponent</strong> is trading on the same market; its balanced is displayed as a purple line.
+            </p>
 
-        <p>
-            The goal of the game is to make more money than the computer within the next 500 time steps.
-            <strong>Good luck!</strong>
-        </p>
+            <p>
+                The goal of the game is to make more money than the computer within the next 500 time steps.
+                <strong>Good luck!</strong>
+            </p>
+        </div>
+        
         
     </div>
 </body>
