@@ -51,7 +51,7 @@ strings = {
 
         1: `
             <p>
-                The market in this level has a tendency to form <strong>trends</strong>. 
+                The market in this level moves in <strong>trends</strong>. 
             </p>
             <p>
                 During a trend, the market tends to move in a certain direction; either up or down.
@@ -86,6 +86,26 @@ strings = {
             </p>
             <p>
                 The goal of this stage is to <strong>double</strong> your money.
+            </p>
+        `,
+
+        3: `
+            <p>
+                This market has a <strong>bias</strong>: it tends to go up over time.
+            </p>
+            <p>
+                In this case, the best strategy is to <strong>buy and hold</strong>.
+                However, you need to be careful with your <strong>position sizing</strong>: risk too much and you might go broke!
+            </p>
+        `,
+
+        4: `
+            <p>
+                This is your <strong>final challenge</strong>.
+            </p>
+            <p>
+                This market contains all the elements you learned about.
+                Trade carefully and try to beat the computer!
             </p>
         `
     }

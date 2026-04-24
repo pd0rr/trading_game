@@ -237,6 +237,46 @@ document.getElementById('level-select').onchange = function(e) {
             updateDisplay(mkt);
             updateChart(mkt);
             break;
+        
+        // bias
+        case '3':
+            document.getElementById('message').textContent = ''
+            document.getElementById('tutorial-text').innerHTML = strings.tutorial[3];
+            mkt = new bias_market(100, 0.05, 0.05);
+            player = new trader([mkt]);
+            sess = new session();
+            sess.markets = [mkt];
+            opponent = new donch_ai([mkt]);
+            sess.traders = [player, opponent];
+            sess.initialize();
+            updateDisplay(mkt);
+            updateChart(mkt);
+            break;
+
+        // realistic marke
+        case '4':
+            document.getElementById('message').textContent = ''
+            document.getElementById('tutorial-text').innerHTML = strings.tutorial[4];
+            sess = new session();
+
+            // create market
+            mkt = new market(100, 0.01);
+            mkt.box_strength = 2.1;
+            mkt.drift_change_p = 0.03;
+            mkt.box_size = 8;
+
+            //create player trader
+            player = new trader([mkt]);
+
+            // create opponent
+            opponent = new donch_ai([mkt]);
+            sess.markets = [mkt];
+            sess.traders = [player, opponent];
+            sess.initialize();
+            updateDisplay(mkt);
+            updateChart(mkt);
+            break;
+
     }
 }
 

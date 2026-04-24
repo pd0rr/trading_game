@@ -5,6 +5,7 @@ class market {
     box_strength = 1.85;
     box_size = 5;
     drift_strength = 1;
+    drift_change_p = 0.05;
 
 
     sigma;
@@ -45,7 +46,7 @@ class market {
         //this.data = this.data.slice(-500);
 
         // chance of changing parameters (drift)
-        if (Math.random() < 0.05) {
+        if (Math.random() < this.drift_change_p) {
             this.drift = this.drift_strength*((Math.floor(Math.random()*2)) - 0.5);
         }
 
@@ -135,6 +136,30 @@ class channel_market extends market {
             this.resistance = this.support;
             this.support *= 1 - gaussianRandom(this.box_size * this.sigma, this.box_var*this.sigma);
         }
+
+        this.data.push({time: this.time, price: this.price, drift: this.drift,
+            support: this.support, resistance: this.resistance, sigma: this.sigma});
+    
+        this.time += 1;
+
+        return pct_change;
+    }
+}
+
+// stonks go up
+class bias_market extends market {
+    constructor(price, volatility, drift) {
+        super(price, volatility);
+        this.box_strength = 0;
+        this.drift = drift;
+
+    }
+
+    update() {
+
+        let pct_change = gaussianRandom(0, this.sigma) + this.drift*this.sigma;
+        this.price *= 1 + pct_change;
+
 
         this.data.push({time: this.time, price: this.price, drift: this.drift,
             support: this.support, resistance: this.resistance, sigma: this.sigma});
