@@ -202,7 +202,7 @@ document.getElementById('level-select').onchange = function(e) {
             sess = new session();
             sess.markets = [mkt];
             opponent = new donch_ai([mkt]);
-            sess.traders = [player, opponent];
+            sess.traders = [player];
             sess.initialize();
             updateDisplay(mkt);
             updateChart(mkt);
@@ -217,7 +217,7 @@ document.getElementById('level-select').onchange = function(e) {
             sess = new session();
             sess.markets = [mkt];
             opponent = new donch_ai([mkt]);
-            sess.traders = [player, opponent];
+            sess.traders = [player];
             sess.initialize();
             updateDisplay(mkt);
             updateChart(mkt);
@@ -232,7 +232,7 @@ document.getElementById('level-select').onchange = function(e) {
             sess = new session();
             sess.markets = [mkt];
             opponent = new channel_ai([mkt]);
-            sess.traders = [player, opponent];
+            sess.traders = [player];
             sess.initialize();
             updateDisplay(mkt);
             updateChart(mkt);
