@@ -97,6 +97,15 @@ strings = {
                 In this case, the best strategy is to <strong>buy and hold</strong>.
                 However, you need to be careful with your <strong>position sizing</strong>: risk too much and you might go broke!
             </p>
+
+            <p>
+                This is the first level where you have an <strong>opponent</strong>.
+                His balance is rapresented by the <strong>purple line</strong> on the lower chart.
+            </p>
+
+            <p>
+                Your goal in this scenario is to have more money than the opponent after 500 time steps. Good luck!
+            </p>
         `,
 
         4: `
@@ -105,7 +114,10 @@ strings = {
             </p>
             <p>
                 This market contains all the elements you learned about.
-                Trade carefully and try to beat the computer!
+            </p>
+
+            <p>
+                Your goal is to beat the computer opponent after 500 time steps. Good luck!
             </p>
         `
     }

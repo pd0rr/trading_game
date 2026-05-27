@@ -104,27 +104,27 @@ function updateChart(mkt) {
     //div.append(plot4);
 }
 
-function check_winner(mkt) {
-
+function check_winner(session, player, opponent, msg_elm) {
+    let ret = true;
     // check loser
     if (player.balance <= 0) {
         document.getElementById('message').textContent = 'Player lost!'
         player.balance = 0;
         player.positions[0] = 0;
-        run = false;
+        ret = false;
     }
 
     if (opponent.balance <= 0) {
         document.getElementById('message').textContent = 'Computer lost!'
         opponent.balance = 0;
         opponent.positions[0] = 0;
-        run = false;
+        ret = false;
     }
 
     // check winner
     if (sess.time == 1000) {
-        run = false
-        let msg = document.getElementById('message');
+        ret = false
+        let msg = msg_elm;
         msg.textContent = 'Game over: ';
         if (player.balance > opponent.balance) {
             msg.textContent +='player won.';
@@ -133,8 +133,10 @@ function check_winner(mkt) {
         } else {
             msg.textContent += 'tie.';
         }
-
+    
     }
+
+    return ret;
 }
 
 // Main loop
@@ -143,7 +145,7 @@ function update() {
     sess.step();
     updateDisplay(mkt);
     updateChart(mkt);
-    check_winner(mkt);
+    run = check_winner(sess, player, opponent, document.getElementById('message'));
 }
 
 function play() {
@@ -221,6 +223,7 @@ document.getElementById('level-select').onchange = function(e) {
             sess.initialize();
             updateDisplay(mkt);
             updateChart(mkt);
+            check_winner = levels[1];
             break;
 
         // channel
@@ -236,6 +239,7 @@ document.getElementById('level-select').onchange = function(e) {
             sess.initialize();
             updateDisplay(mkt);
             updateChart(mkt);
+            check_winner = levels[2];
             break;
         
         // bias
@@ -251,9 +255,10 @@ document.getElementById('level-select').onchange = function(e) {
             sess.initialize();
             updateDisplay(mkt);
             updateChart(mkt);
+            check_winner = levels[3];
             break;
 
-        // realistic marke
+        // realistic market
         case '4':
             document.getElementById('message').textContent = ''
             document.getElementById('tutorial-text').innerHTML = strings.tutorial[4];
@@ -275,6 +280,7 @@ document.getElementById('level-select').onchange = function(e) {
             sess.initialize();
             updateDisplay(mkt);
             updateChart(mkt);
+            check_winner = levels[3];
             break;
 
     }
