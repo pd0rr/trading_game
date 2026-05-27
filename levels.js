@@ -72,5 +72,7 @@ levels = {
                 msg.textContent += 'tie.';
             }
         }
+
+        return ret;
     }
 }
